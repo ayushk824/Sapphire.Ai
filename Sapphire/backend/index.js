@@ -12,7 +12,10 @@ const app = express();
 
 app.use(
   cors({
-    origin: process.env.CLIENT_URL,
+     origin: [
+      'https://sapphire-ai-frontend.onrender.com', // Add this for production
+      'http://localhost:5173' // Keep for local development
+    ],
     credentials: true,
   })
 );
