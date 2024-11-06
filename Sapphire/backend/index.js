@@ -12,10 +12,7 @@ const app = express();
 
 app.use(
   cors({
-     origin: [
-      'https://sapphire-ai-frontend.onrender.com', // Add this for production
-      'http://localhost:5173' // Keep for local development
-    ],
+     origin: [process.env.CLIENT_URL, 'https://sapphire-ai-frontend.onrender.com'],
     credentials: true,
   })
 );
@@ -82,6 +79,7 @@ app.post("/api/chats", ClerkExpressRequireAuth(), async (req, res) => {
   }
 });
 app.get("/api/userchats", ClerkExpressRequireAuth(), async (req, res) => {
+   console.log("Request auth object:", req.auth);
   const userId = req.auth.userId;
   try {
     const UserChat = await userChats.find({ userId });
